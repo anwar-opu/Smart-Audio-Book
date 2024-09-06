@@ -14,23 +14,35 @@ print(f"The PDF has {pages} pages.")
 # Initialize the pyttsx3 engine
 speak = pyttsx3.init()
 
-# input start page number
-print('Enter the page number will you start')
-speak.say('Enter the page number will you start')
-speak.runAndWait()
-start = int(input())
-# input end page number
-speak.say('Enter the page number you end')
-speak.runAndWait()
-print('Enter the page number you end')
-end = int(input()) + 1
+# Function to handle user input and validate page range
+def get_valid_page_input(prompt, max_pages):
+    while True:
+        speak.say(prompt)
+        speak.runAndWait()
+        try:
+            page_num = int(input(prompt))
+            if 0 <= page_num < max_pages:
+                return page_num
+            else:
+                print(f"Please enter a valid page number between 0 and {max_pages - 1}.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
+# Input start page number
+start = get_valid_page_input('Enter the start page number:', pages)
+
+# Input end page number
+end = get_valid_page_input('Enter the end page number:', pages) + 1
+
+# Iterate through the pages and read the text aloud
 for i in range(start, end):
     page = pdfReader.pages[i]
     text = page.extract_text()
-    # Speak the text
-    speak.say(text)
-    speak.runAndWait()
+    if text:
+        speak.say(text)
+        speak.runAndWait()
+    else:
+        print(f"No text found on page {i + 1}")
 
 # Close the PDF file
 book.close()
