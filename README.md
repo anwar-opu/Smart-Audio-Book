@@ -12,8 +12,10 @@ The **Smart Audio Book** is a Python application designed to convert text from a
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/anwar-opu/Smart-Audio-Book.git
-## Features
-- Reads aloud the text content of a PDF document.
+2. Install the Required Libraries
+   ```bash
+   pip install pyttsx3 PyPDF2
+
 ## Usage
   1. Place your PDF file in the project directory. Rename it to oop.pdf or modify the code to match your file name.
   2. Run the script:
@@ -26,3 +28,7 @@ The **Smart Audio Book** is a Python application designed to convert text from a
   - Enter the end page number when prompted.
   
 The application will read aloud the text from the specified range of pages.
+
+## Acknowledgments
+- `pyttsx3` : For providing the text-to-speech functionality, which makes it possible to convert text from the PDF into spoken words.
+- `PyPDF2` : For offering tools to extract text from PDF files, enabling the script to read and process document content.
